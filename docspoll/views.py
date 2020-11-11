@@ -4,6 +4,7 @@ from .models import Question, Vote
 from django.views.generic import ListView, DetailView
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+# from django.views import View
 
 
 class QuestionListView(ListView):
@@ -33,5 +34,18 @@ def vote(request, question_id):
         return HttpResponseRedirect(reverse('vote', args=(question.id,)))
 
 
+class ChartView(ListView):
+    model = Vote
+    context_object_name = 'objects'
+    template_name = 'docspoll/chartjs.html'
+
+
+    
+
+class FlotView(ListView):
+    model = Vote
+    context_object_name = 'objects'
+    template_name = 'docspoll/flot.html'
+
 def lte(request):
-    return render(request, 'docspoll/index.html')
+    return render(request, 'index.html')
